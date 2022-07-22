@@ -95,19 +95,23 @@ function showMovies(data) {
     main.innerHTML = '';
 
     data.forEach(movie => {
-        const {title, poster_path, vote_average, overview, id, release_date} = movie;
+        const {title, poster_path, vote_average, overview, id, release_date, popularity, vote_count, adult} = movie;
         const movieEl = document.createElement('div');
         movieEl.classList.add('movie');
         movieEl.innerHTML = `
-            <img src="${poster_path? IMG_URL+poster_path: "http://via.placeholder.com/1080x1580" }" alt="${title}">
+             <img src="${poster_path? IMG_URL+poster_path: "http://via.placeholder.com/1080x1580" }" alt="${title}">
             <div class="movie-info">
-                <h3>Title: <br>${title}</h3>
-                <span class="${getColor(vote_average)}">Rating: <br>${vote_average}</span>
+                <h3>Title:<br>${title}</h3>
+               <span class="${getColor(vote_average)}">Rating: <br>${vote_average}</span>
 				<span class="${getYear(release_date)}">Release Date: <br>${release_date}</span>
             </div>
             <div class="overview">
                 <h3>Overview</h3>
                 ${overview}
+				<h3>Popularity</h3>
+				${popularity}
+				<h3># of Votes:</h3>
+				${vote_count}
                 <br/> 
                 <button class="know-more" id="${id}">Know More</button
             </div>
@@ -122,7 +126,6 @@ function showMovies(data) {
         })
     })
 }
-
 const overlayContent = document.getElementById('overlay-content');
 
 function openNav(movie) {
